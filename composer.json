@@ -1,5 +1,5 @@
 {
-    "name": "guzzle/stream",
+    "name": "egroupware/guzzlestream",
     "description": "Guzzle stream wrapper component",
     "homepage": "http://guzzlephp.org/",
     "keywords": ["stream", "component", "guzzle"],
