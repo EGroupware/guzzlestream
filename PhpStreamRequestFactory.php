@@ -210,11 +210,15 @@ class PhpStreamRequestFactory implements StreamRequestFactoryInterface
      */
     protected function createStream(array $params)
     {
-        $http_response_header = null;
+        $http_response_headers = null;
         $url = $this->url;
         $context = $this->context;
-        $fp = $this->createResource(function () use ($context, $url, &$http_response_header) {
-            return fopen((string) $url, 'r', false, $context);
+        $fp = $this->createResource(function () use ($context, $url, &$http_response_headers) {
+            if (($ret = fopen((string) $url, 'r', false, $context)))
+			{
+				$http_response_headers = $http_response_header;
+			}
+            return $ret;
         });
 
         // Determine the class to instantiate
@@ -224,8 +228,8 @@ class PhpStreamRequestFactory implements StreamRequestFactoryInterface
         $stream = new $className($fp);
 
         // Track the response headers of the request
-        if (isset($http_response_header)) {
-            $this->lastResponseHeaders = $http_response_header;
+        if (isset($http_response_headers)) {
+            $this->lastResponseHeaders = $http_response_headers;
             $this->processResponseHeaders($stream);
         }
 
