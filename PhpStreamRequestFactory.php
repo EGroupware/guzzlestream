@@ -155,9 +155,10 @@ class PhpStreamRequestFactory implements StreamRequestFactoryInterface
     {
         if ($request->getCurlOptions()->get(CURLOPT_SSL_VERIFYPEER)) {
             $this->setContextValue('ssl', 'verify_peer', true, true);
+            /* do NOT overwrite CAs with old bundle
             if ($cafile = $request->getCurlOptions()->get(CURLOPT_CAINFO)) {
                 $this->setContextValue('ssl', 'cafile', $cafile, true);
-            }
+            }*/
         } else {
             $this->setContextValue('ssl', 'verify_peer', false, true);
         }
