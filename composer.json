@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=5.3.2",
-        "guzzle/common": "^3.9.2"
+        "egroupware/guzzlecommon": "^3.9.3"
     },
     "replace": {
         "guzzle/stream": "*"
